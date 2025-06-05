@@ -11,6 +11,7 @@ import {
 } from "react-hook-form";
 import { ZodType } from "zod";
 
+import ImageUpload from "@/components/FileUpload";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,12 +22,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import ImageUpload from "@/components/ImageUpload";
+import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import FileUpload from "@/components/FileUpload";
 
 
 interface Props<T extends FieldValues> {
@@ -53,8 +54,7 @@ const handleSubmit:SubmitHandler<T> =async(data)=>{ const result = await onSubmi
   router.push("/");
   }else{
    toast(`error ${isSignIn ? "signing in": "signing up"}`, {
-    description: result.error ?? "An error occurred",
-  
+    description: result.error ?? "An error occurred", 
   });  
   }
 };
@@ -78,7 +78,7 @@ return (
               <FormLabel>{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}</FormLabel>
               <FormControl>
                 {field.name === 'universityCard'?(
-                  <ImageUpload  onFileChange={field.onChange}/>
+                  <FileUpload type="image"  accept= "image/*" placeholder = "Upload Your ID" folder = "ids" variant="dark" onFileChange={field.onChange}/>
                 ): (
                   <Input required type={FIELD_NAMES[field.name as keyof typeof FIELD_TYPES]} {...field} className="form-input" />
                 )}
