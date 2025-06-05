@@ -36,7 +36,7 @@ if(result.success){
   toast("success", {
     description:  "Borrowed successfully",
   });  
-  router.push("/my-profile");
+  router.push("/");
 }else{
     toast.error("Something went wrong", {
    description:"an error occured while borrowing the book"
